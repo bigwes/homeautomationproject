@@ -53,5 +53,5 @@ SELECT
   WHERE
     key = 'state'
     AND event_timestamp = base.event_timestamp ) AS device_state_float
-  FROM
-    `home-automation-project-001.analytics_314144287.events_intraday_*` AS base
+FROM
+  `home-automation-project-001.analytics_314144287.events_intraday_*` AS base
