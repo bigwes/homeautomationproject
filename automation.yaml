@@ -1,0 +1,293 @@
+# ****** 001: Lighting
+- id: "001"
+  alias: Lighting
+  description: Hue and Ecobee Lights Listener
+  trigger:
+    - platform: state
+      entity_id:
+        - light.bar_lights
+        - light.ceiling_fan_lights
+        - light.craft_room
+        - light.laundry_room
+        - light.master_bath
+        - light.office
+        - light.tv_lights
+        - light.upstairs_bath
+        - light.water_closet
+        - switch.bedroom
+        - switch.dining_room
+        - switch.downstairs_bathroom
+        - switch.downstairs_kitchen
+        - switch.stairs
+        - switch.upper_east_manhattan
+        - switch.upstairs_kitchen
+        - switch.upstairs_shower
+  condition: []
+  action:
+    - service: rest_command.hometracker_ua
+      data:
+        integration: lighting
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+    - service: rest_command.hometracker_ga4
+      data:
+        integration: lighting
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+  mode: single
+
+# ****** 002: Motion Detectors
+- id: "002"
+  alias: Motion Detectors
+  description: Hue and Ecobee Motion Detectors
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.craft_room_motion_sensor_motion
+        - binary_sensor.downstairs_bathroom
+        - binary_sensor.laundry_room_sensor_motion
+        - binary_sensor.master_bath_sensor_motion
+        - binary_sensor.office_sensor_motion
+        - switch.upstairs_bath_sensor_motion
+        - binary_sensor.water_closet_motion_sensor_motion
+        - binary_sensor.stairs
+  condition: []
+  action:
+    - service: rest_command.hometracker_ua
+      data:
+        integration: motion detectors
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+    - service: rest_command.hometracker_ga4
+      data:
+        integration: motion_detectors
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+  mode: single
+
+# ****** 003: Temperature
+- id: "003"
+  alias: Temperature
+  description: Ecobee Temperature Sensors
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.bedroom_temperature
+        - sensor.craft_room_sensor_temperature
+        - sensor.dining_room_temperature
+        - sensor.downstairs_bathroom_temperature
+        - sensor.downstairs_kitchen_temperature
+        - sensor.laundry_room_sensor_temperature
+        - sensor.master_bath_sensor_temperature
+        - sensor.office_sensor_temperature
+        - sensor.stairs_temperature
+        - sensor.upper_east_manhattan_temperature
+        - sensor.upstairs_shower_temperature
+        - sensor.upstairs_kitchen_temperature
+        - sensor.water_closet_motion_sensor_temperature
+  condition: []
+  action:
+    - service: rest_command.hometracker_ua
+      data:
+        integration: temperature
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+    - service: rest_command.hometracker_ga4
+      data:
+        integration: temperature
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+  mode: single
+
+# ****** 004: Thermostats
+- id: "004"
+  alias: Thermostats
+  description: Ecobee Thermostats
+  trigger:
+    - platform: state
+      entity_id:
+        - climate.upstairs_thermostat
+        - climate.downstairs_thermostat
+  condition: []
+  action:
+    - service: rest_command.hometracker_ua
+      data:
+        integration: thermostats
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+    - service: rest_command.hometracker_ga4
+      data:
+        integration: thermostats
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+  mode: single
+
+# ****** 005: Humidity
+- id: "005"
+  alias: Humidity
+  description: Ecobee Humidity Sensor
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.downstairs_thermostat_humidity
+        - sensor.upstairs_thermostat_humidity
+  condition: []
+  action:
+    - service: rest_command.hometracker_ua
+      data:
+        integration: humidity
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+    - service: rest_command.hometracker_ga4
+      data:
+        integration: humidity
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+  mode: single
+
+# ****** 006: Ring Cameras
+- id: "006"
+  alias: Ring Cameras
+  description: Ring Camera Motion Alerts
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.backyard_camera_motion
+        - binary_sensor.deck_camera_motion
+        - binary_sensor.driveway_camera_motion
+        - binary_sensor.front_door_camera_motion
+        - binary_sensor.side_camera_motion
+  condition: []
+  action:
+    - service: rest_command.hometracker_ua
+      data:
+        integration: cameras
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+    - service: rest_command.hometracker_ga4
+      data:
+        integration: cameras
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+  mode: single
+
+# ****** 007: Printers
+- id: "007"
+  alias: Printers
+  description: HP Printer and Octoprint Server
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.hp_officejet_pro_8600
+        - binary_sensor.octoprint_printing
+  condition: []
+  action:
+    - service: rest_command.hometracker_ua
+      data:
+        integration: printers
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+    - service: rest_command.hometracker_ga4
+      data:
+        integration: printers
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+  mode: single
+
+# ****** 008: Occupancy
+- id: "008"
+  alias: Occupancy
+  description: Ecobee Occupancy Sensor
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.bedroom_sensor_occupancy
+        - binary_sensor.craft_room_sensor_occupancy
+        - binary_sensor.downstairs_thermostat_occupancy
+        - binary_sensor.office_sensor_occupancy
+        - binary_sensor.upper_east_side_sensor_occupancy
+        - binary_sensor.upstairs_thermostat_occupancy
+  condition: []
+  action:
+    - service: rest_command.hometracker_ua
+      data:
+        integration: occupancy
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+    - service: rest_command.hometracker_ga4
+      data:
+        integration: occupancy
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+  mode: single
+
+# ****** 009: Televisions
+- id: "009"
+  alias: Televisions
+  description: All TVs
+  trigger:
+    - platform: state
+      entity_id:
+        - media_player.bedroom_tv
+        - media_player.craft_room_roku
+        - media_player.downstairs_frame
+        - media_player.fire_tv_10_0_0_73
+        - media_player.upper_east_manhattan_tv
+        - media_player.upstairs_frame
+  condition: []
+  action:
+    - service: rest_command.hometracker_ua
+      data:
+        integration: televisions
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+    - service: rest_command.hometracker_ga4
+      data:
+        integration: televisions
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+  mode: single
+
+# ****** 010: Weather Conditions
+- id: "010"
+  alias: Current Weather Conditons
+  description: Ecobee Upstairs Thermostat
+  trigger:
+    - platform: state
+      entity_id:
+        - weather.upstairs_thermostat
+  condition: []
+  action:
+    - service: rest_command.hometracker_ua
+      data:
+        integration: weather conditions
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+    - service: rest_command.hometracker_ga4
+      data:
+        integration: weather_conditions
+        device: "{{ trigger.entity_id }}"
+        state: "{{ trigger.to_state.state }}"
+  mode: single
+
+# ****** 011: Weather Temperature
+- id: "011"
+  alias: Current Weather Temperature
+  description: Ecobee Upstairs Thermostat
+  trigger:
+    - platform: numeric_state
+      entity_id: weather.hall_house
+      attribute: temperature
+      below: "110"
+  action:
+    - service: rest_command.hometracker_ua
+      data:
+        integration: weather temperature
+        device: "{{ trigger.entity_id }}"
+        state: "69"
+    - service: rest_command.hometracker_ga4
+      data:
+        integration: weather_temperature
+        device: "{{ trigger.entity_id }}"
+        state: "69"
+  mode: single
