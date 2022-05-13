@@ -1,0 +1,27 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+rest_command:
+  hometracker_ua:
+    url: https://google-analytics.com/collect?v=1&t=event&tid=UA-160387434-11&cid=thtn45454t&ec={{ integration }}&ea={{ device }}&el={{ action }}
+    method: get
+    headers:
+      accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+      user-agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36"
+    content_type: "image/gif"
+  hometracker_ga4:
+    url: https://google-analytics.com/mp/collect?measurement_id=[ MEASUREMENT ID ]&api_secret=[ SECRET KEY ]
+    method: post
+    headers:
+      accept: "application/json, text/html"
+      user-agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36"
+    payload: "{'client_id':'[ CLIENT ID ]','user_id':'[ USER ID ]',events:[{'name':'{{ integration }}','params':{'area':'{{ device }}','action':'{{ action }}'}}]}"
+    content_type: "application/json; charset=utf-8"
